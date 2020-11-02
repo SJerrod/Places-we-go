@@ -19,6 +19,10 @@
 
 | Behavior                                                        | Input     | Output    |
 | --------------------------------------------------------------- | --------- | --------- |
+| Site to Keep track of places we have been | Takes user input | None |
+| User can enter information about place onto page | Form input | None |
+| User can store information through submit function | Boston | Boston |
+| Display info when clicking on the place | Boston.onclick | Boston.show |
 
 
 ## Bugs
