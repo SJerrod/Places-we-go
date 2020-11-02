@@ -2,6 +2,10 @@ h1 {
   text-align: center;
 }
 
-/* div p {
+div p {
 display: none;
-} */
+}
+
+#showPlace {
+  display: none;
+}
