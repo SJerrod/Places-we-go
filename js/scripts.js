@@ -58,7 +58,34 @@ function displayPlaceDetails(placeListToDisplay) {
   destinationList.html(htmlForPlacesInfo);
 };
 
+function showPlace(placeId) {
+  const newPlace = placeList.findPlace(placeId);
+  $("#showPlace").show() ;
+  $(".city").html(newPlace.city);
+  $(".country").html(newPlace.country);
+  $(".landmark").html(newPlace.landmark);
+  $(".food").html(newPlace.food);
+  $(".population").html(newPlace.pop);
+  $(".language").html(newPlace.lang);
+  // Delete button not showing up
+  let buttons = $("#buttons");
+  buttons.empty();
+  buttons.append("<button class='deleteButton' id=" + place.id + ">Delete</button>");
+}
+
+function attachPlaceListeners() {
+  $("ul#places").on("click", "li", function() {
+    showPlace(this.id);
+  });
+  $("#buttons").on("click", ".deleteButton", function() {
+    placeList.deletePlace(this.id);
+    $("#showPlace").hide();
+    displayPlaceDetails(placeList);
+  });
+};
+
 $(document).ready(function() {
+  attachPlaceListeners();
   $("#addPlace").submit(function(event) {
     event.preventDefault();
 
@@ -68,20 +95,18 @@ $(document).ready(function() {
     let food = $("input#addFood").val();
     let pop = $("input#addPop").val();
     let lang = $("input#addLang").val();
+    
+    // this clears the form fields
+    $("input#addCity").val("");
+    $("input#addCountry").val("");
+    $("input#addLandmark").val("");
+    $("input#addFood").val("");
+    $("input#addPop").val("");
+    $("input#addLang").val("");
+
     let newPlace = new Place(city, country, landmark, food, pop, lang);
     placeList.addPlace(newPlace);
     displayPlaceDetails(placeList)
 
-
-    $(".row").append(newPlace) 
-    $(".city").text(newPlace.city);
-    $(".country").text(newPlace.country);
-    $(".landmark").text(newPlace.landmark);
-    $(".food").text(newPlace.food);
-    $(".population").text(newPlace.pop);
-    $(".language").text(newPlace.lang);
   });
-    $("h2").click(function() {
-      $("p").toggle();
-    });
 });
